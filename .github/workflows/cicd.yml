@@ -19,7 +19,7 @@ jobs:
           flutter analyze
           flutter test
           flutter build web
-      - name: Zip Files
+      - name: Zip Web Files
         uses: vimtor/action-zip@v1
         with:
           files: build/web
