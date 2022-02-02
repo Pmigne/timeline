@@ -156,8 +156,7 @@ class GanttChart extends StatelessWidget {
       if (remainingWidth > 0) {
         chartBars.add(GestureDetector(
           onTap: () {
-            print('Durée: ${data[i].duration} jours');
-            // TODO add this method
+            // print('Durée: ${data[i].duration} jours');
           },
           child: Container(
             margin: EdgeInsets.only(
