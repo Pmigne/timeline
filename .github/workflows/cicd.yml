@@ -19,10 +19,16 @@ jobs:
           flutter analyze
           flutter test
           flutter build web
+      - name: Zip Files
+        uses: actions/checkout@v2
+        uses: papeloto/action-zip@v1
+        with:
+          files: build/web/*
+          dest: build/web/web-build.zip
       - name: Upload Web
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "build/web/*"
+          artifacts: "build/web/web-build.zip"
           tag: Web.V1.0.${{ github.run_number }}
           token: ${{ secrets.TOKEN }}
           # Github -> Settings -> Developer settings -> Personal access tokens -> repo
