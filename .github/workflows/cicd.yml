@@ -81,8 +81,6 @@ jobs:
           flutter analyze
           flutter test
           flutter build apk --debug --split-per-abi
-      #         flutter build apk --target-platform android-arm,android-arm64 --split-per-abi
-      #         flutter build appbundle --target-platform android-arm,android-arm64
       - name: Zip Android Files
         uses: vimtor/action-zip@v1
         with:
