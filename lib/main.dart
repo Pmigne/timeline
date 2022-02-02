@@ -81,6 +81,7 @@ class _TimelineState extends State<Timeline> with TickerProviderStateMixin {
   }
 }
 
+// ignore: must_be_immutable
 class GanttChart extends StatelessWidget {
   final AnimationController animationController;
   final DateTime fromDate;
