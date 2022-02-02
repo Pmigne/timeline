@@ -22,7 +22,7 @@ jobs:
       - name: Zip Files
         uses: vimtor/action-zip@v1
         with:
-          files: build/web/*
+          files: build/web
           dest: build/web/web-build.zip
       - name: Upload Web
         uses: ncipollo/release-action@v1
