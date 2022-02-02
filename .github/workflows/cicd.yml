@@ -20,7 +20,7 @@ jobs:
           flutter test
           flutter build web
       - name: Zip Files
-        uses: papeloto/action-zip@v1
+        uses: vimtor/action-zip@v1
         with:
           files: build/web/*
           dest: build/web/web-build.zip
