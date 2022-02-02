@@ -1,7 +1,7 @@
 name: build
 on:
   push:
-    branches: [releases]
+    branches: [main]
 jobs:
   build-web:
     name: Build Flutter (Web)
