@@ -153,51 +153,51 @@ jobs:
   #         tag: V1.0.${{ github.run_number }}-Linux
   #         token: ${{ secrets.TOKEN }}
   job1:
-  build-macos:
-    name: Build Flutter (MacOS)
-    runs-on: macos-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: subosito/flutter-action@v2
-        with:
-          flutter-version: "2.8.0"
-          channel: stable
-      - name: Build MacOS
-        run: |
-          flutter config --enable-macos-desktop
-          flutter clean
-          flutter create .
-          flutter pub get
-          flutter format --set-exit-if-changed .
-          flutter analyze
-          flutter test
-          flutter build macos
-      - name: Zip Linux Files
-        uses: vimtor/action-zip@v1
-        with:
-          files: build/macos/Build/Products/Release
-          dest: build/macos/Build/Products/Release/macos-build.zip
-      - name: Upload Artifact
-        id: build-macos
-        uses: actions/upload-artifact@v2
-        with:
-          name: my-artifact
-          path: build/macos/Build/Products/Release/macos-build.zip
+    build-macos:
+      name: Build Flutter (MacOS)
+      runs-on: macos-latest
+      steps:
+        - uses: actions/checkout@v2
+        - uses: subosito/flutter-action@v2
+          with:
+            flutter-version: "2.8.0"
+            channel: stable
+        - name: Build MacOS
+          run: |
+            flutter config --enable-macos-desktop
+            flutter clean
+            flutter create .
+            flutter pub get
+            flutter format --set-exit-if-changed .
+            flutter analyze
+            flutter test
+            flutter build macos
+        - name: Zip Linux Files
+          uses: vimtor/action-zip@v1
+          with:
+            files: build/macos/Build/Products/Release
+            dest: build/macos/Build/Products/Release/macos-build.zip
+        - name: Upload Artifact
+          id: build-macos
+          uses: actions/upload-artifact@v2
+          with:
+            name: my-artifact
+            path: build/macos/Build/Products/Release/macos-build.zip
   job2:
     needs: job1
-  upload-builds:
-    name: Upload Builds
-    if: steps.build-macos.outcome == 'success'
-    runs-on: windows-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/download-artifact@v2
-        with:
-          name: my-artifact
-          path: build/macos/Build/Products/Release/macos-build.zip
-      - name: Upload builds
-        uses: ncipollo/release-action@v1
-        with:
-          artifacts: "build/macos/Build/Products/Release/macos-build.zip"
-          tag: V1.0.${{ github.run_number }}-MacOS
-          token: ${{ secrets.TOKEN }}
+    upload-builds:
+      name: Upload Builds
+      if: steps.build-macos.outcome == 'success'
+      runs-on: windows-latest
+      steps:
+        - uses: actions/checkout@v2
+        - uses: actions/download-artifact@v2
+          with:
+            name: my-artifact
+            path: build/macos/Build/Products/Release/macos-build.zip
+        - name: Upload builds
+          uses: ncipollo/release-action@v1
+          with:
+            artifacts: "build/macos/Build/Products/Release/macos-build.zip"
+            tag: V1.0.${{ github.run_number }}-MacOS
+            token: ${{ secrets.TOKEN }}
