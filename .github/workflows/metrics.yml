@@ -9,4 +9,4 @@ jobs:
       - name: dart-code-metrics
         uses: dart-code-checker/dart-code-metrics-action@v1
         with:
-          github_token: ${{ secrets.TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
