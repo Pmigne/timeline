@@ -154,6 +154,7 @@ jobs:
   #         token: ${{ secrets.TOKEN }}
   build-macos:
     name: Build Flutter (MacOS)
+    id: build-macos
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
@@ -181,21 +182,16 @@ jobs:
         with:
           name: my-artifact
           path: build/macos/Build/Products/Release/macos-build.zip
-      # - name: Upload MacOS
-      #   uses: ncipollo/release-action@v1
-      #   with:
-      #     artifacts: "build/macos/Build/Products/Release/macos-build.zip"
-      #     tag: V1.0.${{ github.run_number }}-MacOS
-      #     token: ${{ secrets.TOKEN }}
   upload-builds:
     name: Upload Builds
+    if: steps.build-macos.outcome == 'success'
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
-      # - uses: actions/download-artifact@v2
-      #   with:
-      #     name: my-artifact
-      #     path: path/to/artifact
+      - uses: actions/download-artifact@v2
+        with:
+          name: my-artifact
+          path: build/macos/Build/Products/Release/macos-build.zip
       - name: Upload builds
         uses: ncipollo/release-action@v1
         with:
