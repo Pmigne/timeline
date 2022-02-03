@@ -190,6 +190,10 @@ jobs:
         with:
           name: macos-build
           path: build-release/macos
+      - uses: actions/download-artifact@v2
+        with:
+          name: linux-build
+          path: build-release/macos
       - name: Upload builds
         uses: ncipollo/release-action@v1
         with:
