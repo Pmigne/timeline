@@ -194,6 +194,6 @@ jobs:
       - name: Upload builds
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "macos"
+          artifacts: "macos/*"
           tag: V1.0.${{ github.run_number }}-MacOS
           token: ${{ secrets.TOKEN }}
