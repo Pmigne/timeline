@@ -154,7 +154,6 @@ jobs:
   #         token: ${{ secrets.TOKEN }}
   build-macos:
     name: Build Flutter (MacOS)
-    id: build-macos
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
@@ -178,6 +177,7 @@ jobs:
           files: build/macos/Build/Products/Release
           dest: build/macos/Build/Products/Release/macos-build.zip
       - name: Upload Artifact
+        id: build-macos
         uses: actions/upload-artifact@v2
         with:
           name: my-artifact
