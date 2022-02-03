@@ -171,16 +171,16 @@ jobs:
           flutter analyze
           flutter test
           flutter build macos
-      # - name: Zip MacOS Files
-      #   uses: vimtor/action-zip@v1
-      #   with:
-      #     files: build/macos/Build/Products/Release
-      #     dest: build/macos/Build/Products/Release/macos-build.zip
+      - name: Zip MacOS Files
+        uses: vimtor/action-zip@v1
+        with:
+          files: build/macos/Build/Products/Release
+          dest: build-release/macos/macos-build.zip
       - name: Upload Artifact
         uses: actions/upload-artifact@v2
         with:
           name: macos-build
-          path: macos
+          path: build-release/macos
   upload-builds:
     name: Upload Builds
     needs: build-macos
@@ -190,10 +190,10 @@ jobs:
       - uses: actions/download-artifact@v2
         with:
           name: macos-build
-          path: macos
+          path: build-release/macos
       - name: Upload builds
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "macos/*"
+          artifacts: "build-release/macos/*"
           tag: V1.0.${{ github.run_number }}-MacOS
           token: ${{ secrets.TOKEN }}
