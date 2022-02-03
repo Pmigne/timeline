@@ -192,6 +192,6 @@ jobs:
       - name: Upload builds
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "build-release/macos/*"
+          artifacts: "build-release/macos/*.zip"
           tag: V1.0.${{ github.run_number }}
           token: ${{ secrets.TOKEN }}
