@@ -152,6 +152,7 @@ jobs:
   #         artifacts: "build/linux/x64/release/bundle/linux-build.zip"
   #         tag: V1.0.${{ github.run_number }}-Linux
   #         token: ${{ secrets.TOKEN }}
+  job1:
   build-macos:
     name: Build Flutter (MacOS)
     runs-on: macos-latest
@@ -182,6 +183,8 @@ jobs:
         with:
           name: my-artifact
           path: build/macos/Build/Products/Release/macos-build.zip
+  job2:
+    needs: job1
   upload-builds:
     name: Upload Builds
     if: steps.build-macos.outcome == 'success'
